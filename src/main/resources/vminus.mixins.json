@@ -1,0 +1,33 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.lixir.vminus.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "block.AbstractBlockMixin",
+    "block.AbstractBlockStateMixin",
+    "block.BlockMixin",
+    "entity.EntityMixin",
+    "entity.EntityTypeMixin",
+    "entity.ItemEntityMixin",
+    "entity.effect.StatusEffectMixin",
+    "item.ItemGroupMixin",
+    "item.ItemMixin",
+    "item.ItemStackMixin",
+    "registry.tag.TagManagerLoaderMixin",
+    "resource.JsonDataLoaderAccessor",
+    "resource.JsonDataLoaderMixin",
+    "screen.slot.SlotMixin",
+    "server.DatapackContentsMixin",
+    "server.PlayerManagerMixin",
+    "server.ServerWorldMixin",
+    "server.world.ServerEntityManagerMixin",
+    "world.ChunkRegionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

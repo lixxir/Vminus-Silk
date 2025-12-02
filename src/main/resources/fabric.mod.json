@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "id": "vminus",
+  "version": "${version}",
+  "name": "vminus",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/vminus/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      {
+        "adapter": "kotlin",
+        "value": "net.lixir.vminus.client.VminusDataGenerator"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "net.lixir.vminus.client.VminusClient"
+      }
+    ],
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "net.lixir.vminus.Vminus"
+      }
+    ],
+    "cardinal-components": [
+      "net.lixir.vminus.component.VminusComponents"
+    ]
+  },
+  "accessWidener" : "vminus.accesswidener",
+  "mixins": [
+    "vminus.mixins.json",
+    {
+      "config": "vminus.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabric-language-kotlin": ">=1.13.6+kotlin.2.2.20",
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "custom": {
+    "cardinal-components": [
+      "vminus:cape"
+    ],
+    "loom:injected_interfaces": {
+      "net/minecraft/registry/tag/TagManagerLoader": [
+        "net/lixir/vminus/duck/TagManagerLoaderDuck"
+      ],
+      "net/minecraft/block/Block": [
+        "net/lixir/vminus/duck/VisionDuck",
+        "net/lixir/vminus/duck/block/VminusBlockDuck"
+      ],
+      "net/minecraft/block/AbstractBlock": [
+        "net/lixir/vminus/duck/VisionDuck"
+      ],
+      "net/minecraft/block/AbstractBlock\u0024AbstractBlockState": [
+        "net/lixir/vminus/duck/VisionDuck"
+      ],
+      "net/minecraft/item/ItemStack": [
+        "net/lixir/vminus/duck/VisionDuck",
+        "net/lixir/vminus/duck/item/VminusItemStackDuck"
+      ],
+      "net/minecraft/item/Item": [
+        "net/lixir/vminus/duck/VisionDuck",
+        "net/lixir/vminus/duck/item/VminusItemDuck"
+      ],
+      "net/minecraft/entity/Entity": [
+        "net/lixir/vminus/duck/VisionDuck"
+      ],
+      "net/minecraft/entity/EntityType": [
+        "net/lixir/vminus/duck/VisionDuck"
+      ],
+      "net/minecraft/entity/effect/StatusEffect": [
+        "net/lixir/vminus/duck/VisionDuck"
+      ],
+      "net/minecraft/resource/JsonDataLoader": [
+        "net/lixir/vminus/duck/VminusJsonDataLoaderDuck"
+      ]
+    }
+  }
+}

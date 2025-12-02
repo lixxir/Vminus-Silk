@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#forge:armors",
+      "required": false
+    },
+    {
+      "id": "#minecraft:tools",
+      "required": false
+    }
+  ]
+}
