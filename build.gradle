@@ -98,7 +98,12 @@ shadowJar {
     relocate "io.github.jaredmdobson.concentus", "net.lixir.vminus.shaded.concentus"
     relocate "org.gagravarr", "net.lixir.vminus.shaded.vorbis"
 
-    from sourceSets.client.output
+    from(sourceSets.main.output) {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        exclude 'META-INF/**'
+    }
+
+    zip64 = true
 }
 
 
