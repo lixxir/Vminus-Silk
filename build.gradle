@@ -93,20 +93,34 @@ dependencies {
     shadow "org.gagravarr:vorbis-java-core:0.8"
 }
 
-processResources {
-    inputs.property "version", project.version
-    inputs.property "minecraft_version", project.minecraft_version
-    inputs.property "loader_version", project.loader_version
-    filteringCharset "UTF-8"
+shadowJar {
+    configurations = [project.configurations.shadow]
+    relocate "io.github.jaredmdobson.concentus", "net.lixir.vminus.shaded.concentus"
+    relocate "org.gagravarr", "net.lixir.vminus.shaded.vorbis"
 
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version,
-                "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
-    }
+    from sourceSets.client.output
 }
 
-def targetJavaVersion = 17
+
+processResources {
+    var expandProps = [
+            minecraft_version            : minecraft_version,
+            minecraft_version_range      : minecraft_version_range,
+            mod_id                       : mod_id,
+            mod_name                     : mod_name,
+            mod_description              : mod_description,
+            mod_version                  : mod_version,
+            mod_authors                  : mod_authors,
+            mod_license                  : mod_license,
+            maven_group                  : maven_group,
+            loader_version          : loader_version
+    ]
+    filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', "*.mixins.json"]) {
+        expand expandProps
+    }
+    inputs.properties(expandProps)
+}
+def targetJavaVersion = 21
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
@@ -117,20 +131,15 @@ tasks.withType(JavaCompile).configureEach {
         it.options.release.set(targetJavaVersion)
     }
 }
+
 tasks.withType(KotlinCompile).configureEach {
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
         freeCompilerArgs += ["-Xjvm-default=all"]
     }
 }
 
-shadowJar {
-    configurations = [project.configurations.shadow]
-    relocate "io.github.jaredmdobson.concentus", "net.lixir.vminus.shaded.concentus"
-    relocate "org.gagravarr", "net.lixir.vminus.shaded.vorbis"
 
-    from sourceSets.client.output
-}
 
 tasks.remapJar {
     dependsOn shadowJar
@@ -140,17 +149,19 @@ tasks.remapJar {
 
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    if (JavaVersion.current() < javaVersion) {
+    if (JavaVersion.current() < javaVersion)
         toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
+
+    withSourcesJar()
 }
+
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
     }
 }
 
-tasks.processResources {
+tasks.withType(AbstractArchiveTask).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 

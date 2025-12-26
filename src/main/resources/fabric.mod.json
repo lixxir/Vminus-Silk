@@ -1,12 +1,14 @@
 {
   "schemaVersion": 1,
   "id": "vminus",
-  "version": "${version}",
-  "name": "vminus",
-  "description": "",
-  "authors": [],
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_authors}"
+  ],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "${mod_license}",
   "icon": "assets/vminus/icon.png",
   "environment": "*",
   "entrypoints": {

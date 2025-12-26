@@ -10,9 +10,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(Slot.class)
 public abstract class SlotMixin {
-    @Unique
-    private final Slot vminus$slot = (Slot) (Object) this;
-
     @ModifyArg(method = "setStackNoCallbacks", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/inventory/Inventory;setStack(ILnet/minecraft/item/ItemStack;)V"), index = 1)
     private ItemStack vminus$swapSetStack(ItemStack stack) {
