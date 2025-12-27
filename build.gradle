@@ -99,6 +99,7 @@ shadowJar {
     relocate "org.gagravarr", "net.lixir.vminus.shaded.vorbis"
 
     zip64 = true
+    from sourceSets.client.output
 }
 
 
