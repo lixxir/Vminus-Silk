@@ -98,11 +98,6 @@ shadowJar {
     relocate "io.github.jaredmdobson.concentus", "net.lixir.vminus.shaded.concentus"
     relocate "org.gagravarr", "net.lixir.vminus.shaded.vorbis"
 
-    from(sourceSets.main.output) {
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        exclude 'META-INF/**'
-    }
-
     zip64 = true
 }
 
@@ -125,6 +120,7 @@ processResources {
     }
     inputs.properties(expandProps)
 }
+
 def targetJavaVersion = 21
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
