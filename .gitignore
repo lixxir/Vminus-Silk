@@ -9,7 +9,7 @@ src/main/generated
 out/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
-
+bin/
 # JIRA plugin
 atlassian-ide-plugin.xml
 
