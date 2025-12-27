@@ -1,13 +1,10 @@
 # User-specific stuff
 .idea/
 .kotlin
-gradle
 *.iml
 *.ipr
 *.iws
 src/main/generated
-gradlew
-gradlew.bat
 # IntelliJ
 out/
 # mpeltonen/sbt-idea plugin
