@@ -173,13 +173,15 @@ publishing {
             version = project.version
             group = project.group
             from components.java
+
+
         }
     }
 
     repositories {
         maven {
             name = "localModRepo"
-            url = uri(file(localMavenRepo))
+            url = uri("${rootDir}/../local-maven")
         }
     }
 }
