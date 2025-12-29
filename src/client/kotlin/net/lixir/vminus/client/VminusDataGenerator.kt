@@ -12,6 +12,7 @@ import net.lixir.vminus.registry.VRegistry
 
 class VminusDataGenerator : VDataGenerator(), DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
+        if (!System.getProperty("vminus.datagen", "false").toBoolean()) return
         super.onInitializeDataGenerator(fabricDataGenerator)
         pack.addProvider(::VminusItemTagProvider)
         pack.addProvider(::VminusBlockTagProvider)
