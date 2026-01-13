@@ -13,7 +13,7 @@ import net.minecraft.item.Item
  * method during [run].
  *
  */
-class VminusDataGenDefinitionGroupProvider : DataGenDefinitionGroupProvider() {
+open class VminusDataGenDefinitionGroupProvider : DataGenDefinitionGroupProvider() {
     override fun run() {
         assignClasses(VminusDataGenDefinitionGroups.BLOCK, Block::class.java)
         assignClasses(VminusDataGenDefinitionGroups.BLOCK_ITEM, BlockItem::class.java)

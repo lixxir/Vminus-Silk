@@ -1,6 +1,7 @@
 package net.lixir.vminus.client
 
 import net.fabricmc.api.ClientModInitializer
+import net.fabricmc.loader.api.FabricLoader
 import net.lixir.vminus.Vminus.Companion.ID
 import net.lixir.vminus.client.registry.VClientRegistry
 import net.lixir.vminus.client.definition.render.VminusRenderDefinitionGroupProvider
@@ -19,7 +20,7 @@ class VminusClient : ClientModInitializer {
     }
 
     companion object {
-        val DATAGEN_DEFINITION_REGISTRY = DataGenDefinitionRegistry(ID, VminusDataGenDefinitionGroupProvider())
+
         val RENDER_DEFINITION_REGISTRY = RenderDefinitionRegistry(ID, VminusRenderDefinitionGroupProvider()).apply {
             addProvider(VminusBlockRenderLayerProvider(ID))
         }

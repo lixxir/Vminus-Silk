@@ -9,7 +9,7 @@ abstract class AbstractDefinitionRegistry<P : AbstractDefinitionGroupProvider<*>
     protected val modId: String,
     definitionGroupProvider: P
 ) {
-    val providers: MutableList<RegistryDefinitionProvider<*>> = mutableListOf()
+    private val providers: MutableList<RegistryDefinitionProvider<*>> = mutableListOf()
 
     init {
         definitionGroupProvider.generate()
