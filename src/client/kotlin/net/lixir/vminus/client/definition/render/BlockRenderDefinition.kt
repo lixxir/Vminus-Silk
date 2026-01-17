@@ -1,13 +1,14 @@
 package net.lixir.vminus.client.definition.render
 
-import net.lixir.vminus.Vminus
-import net.lixir.vminus.client.definition.AbstractDefinitionRegistry
+import net.lixir.vminus.client.definition.Definition
+import net.lixir.vminus.client.definition.registry.DefinitionRegistry
+
 import net.lixir.vminus.client.render.block.BlockRenderLayerType
 import net.lixir.vminus.client.render.block.BlockRenderLayerTypes
 import net.minecraft.block.Block
 import net.minecraft.registry.Registries
 
-open class BlockRenderDefinition : RenderDefinition<BlockRenderDefinition, Block>() {
+open class BlockRenderDefinition : RenderDefinition<Block>() {
     var blockRenderLayerType: BlockRenderLayerType = BlockRenderLayerTypes.UNSET
         protected set
 
@@ -17,15 +18,15 @@ open class BlockRenderDefinition : RenderDefinition<BlockRenderDefinition, Block
     }
 
     override fun setDefault(of: Block): BlockRenderDefinition {
-        if (isDefaulted) {
-            val definition = AbstractDefinitionRegistry.getDefaultBlockDefinition(of, type) as BlockRenderDefinition?
+        if (inherits) {
+            val definition = DefinitionRegistry.getDefaultBlockDefinition(of, category)
             this.merge(definition)
         }
         return this
     }
 
-    override fun merge(other: BlockRenderDefinition?): BlockRenderDefinition {
-        if (other == null) return this
+    override fun merge(other: Definition<Block>?): Definition<Block> {
+        if (other == null || other !is BlockRenderDefinition) return this
 
         blockRenderLayerType = if (blockRenderLayerType.isUnset) other.blockRenderLayerType else blockRenderLayerType
         return super.merge(other)
@@ -33,23 +34,21 @@ open class BlockRenderDefinition : RenderDefinition<BlockRenderDefinition, Block
 
     override fun toString(): String = "BlockRenderDefinition(blockRenderLayerType=$blockRenderLayerType)"
 
-    override val isEmpty: Boolean
+    override val empty: Boolean
         get() = this == EMPTY
 
     companion object {
-        private val EMPTY = of()
+        private val EMPTY = BlockRenderDefinition()
 
         fun of(block: Block): BlockRenderDefinition {
-            val registry = RenderDefinitionRegistry.fromId(Registries.BLOCK.getId(block).namespace) ?: return of()
+            val registry = RenderDefinitionRegistry.fromId(Registries.BLOCK.getId(block).namespace) ?: return BlockRenderDefinition()
             val definition = registry.getBlockDefinition(block)
             return definition
         }
 
-        fun of(): BlockRenderDefinition = BlockRenderDefinition()
-
-        fun ofDefault(): BlockRenderDefinition {
+        fun ofInheritable(): BlockRenderDefinition {
             val definition = BlockRenderDefinition()
-            definition.isDefaulted = true
+            definition.inherits = true
             return definition
         }
     }

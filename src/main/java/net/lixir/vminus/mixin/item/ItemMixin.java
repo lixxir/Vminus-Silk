@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.lixir.vminus.duck.VisionDuck;
 import net.lixir.vminus.duck.item.VminusItemDuck;
 import net.lixir.vminus.util.ComponentUtils;
+import net.lixir.vminus.util.Identifiable;
 import net.lixir.vminus.vision.Vision;
 import net.lixir.vminus.vision.property.ItemVisionProperties;
 import net.lixir.vminus.vision.property.VisionPropertyRegistry;
@@ -20,6 +21,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.List;
 
 @Mixin(Item.class)
-public abstract class ItemMixin implements VisionDuck, VminusItemDuck {
+public abstract class ItemMixin implements Identifiable, VisionDuck, VminusItemDuck {
     @Unique
     private final Item vminus$self = (Item) (Object) this;
     @Unique
@@ -103,5 +105,11 @@ public abstract class ItemMixin implements VisionDuck, VminusItemDuck {
     @Override
     public Vision vminus$getVision() {
         return Vision.Companion.get(this);
+    }
+
+    @Unique
+    @Override
+    public Identifier getIdentifier() {
+        return Registries.ITEM.getId(vminus$self);
     }
 }

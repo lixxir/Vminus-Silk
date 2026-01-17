@@ -1,10 +1,11 @@
-package net.lixir.vminus.client.definition
+package net.lixir.vminus.client.definition.registry
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap
+import net.lixir.vminus.client.definition.Definition
 import net.minecraft.entity.EntityType
 
 
-interface EntityTypeApplicableDefinitionRegistry<D : AbstractDefinition<D, *>> {
+interface DefinitionRegistryWithEntityTypes<D : Definition<*>> {
     val entityTypeDefinitions: Object2ObjectMap<EntityType<*>, D>
 
     fun getEntityTypeDefinition(entityType: EntityType<*>): D?

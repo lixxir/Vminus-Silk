@@ -1,6 +1,6 @@
 package net.lixir.vminus.client.definition
 
-import net.minecraft.util.StringIdentifiable
+import net.lixir.vminus.util.Identifiable
 
 /**
  * Represents a type of definition category.
@@ -10,4 +10,4 @@ import net.minecraft.util.StringIdentifiable
  * @see [DefinitionCategories]
  * @see [AbstractDefinitionRegistry]
  */
-interface DefinitionCategory : StringIdentifiable
+interface DefinitionCategory : Identifiable

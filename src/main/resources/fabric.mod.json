@@ -58,7 +58,8 @@
       ],
       "net/minecraft/block/Block": [
         "net/lixir/vminus/duck/VisionDuck",
-        "net/lixir/vminus/duck/block/VminusBlockDuck"
+        "net/lixir/vminus/duck/block/VminusBlockDuck",
+        "net/lixir/vminus/util/Identifiable"
       ],
       "net/minecraft/block/AbstractBlock": [
         "net/lixir/vminus/duck/VisionDuck"
@@ -72,13 +73,16 @@
       ],
       "net/minecraft/item/Item": [
         "net/lixir/vminus/duck/VisionDuck",
-        "net/lixir/vminus/duck/item/VminusItemDuck"
+        "net/lixir/vminus/duck/item/VminusItemDuck",
+        "net/lixir/vminus/util/Identifiable"
       ],
       "net/minecraft/entity/Entity": [
-        "net/lixir/vminus/duck/VisionDuck"
+        "net/lixir/vminus/duck/VisionDuck",
+        "net/lixir/vminus/util/Identifiable"
       ],
       "net/minecraft/entity/EntityType": [
-        "net/lixir/vminus/duck/VisionDuck"
+        "net/lixir/vminus/duck/VisionDuck",
+        "net/lixir/vminus/util/Identifiable"
       ],
       "net/minecraft/entity/effect/StatusEffect": [
         "net/lixir/vminus/duck/VisionDuck"

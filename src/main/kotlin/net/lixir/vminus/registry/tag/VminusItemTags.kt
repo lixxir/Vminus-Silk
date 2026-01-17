@@ -1,6 +1,6 @@
 package net.lixir.vminus.registry.tag
 
-import net.lixir.vminus.Vminus.Companion.vminusIdentifier
+import net.lixir.vminus.Vminus.Companion.id
 import net.minecraft.item.Item
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
@@ -38,6 +38,6 @@ object VminusItemTags {
     val NETHER_VINES: TagKey<Item> = of("nether_vines")
 
     private fun of(name: String): TagKey<Item> {
-        return TagKey.of(RegistryKeys.ITEM, vminusIdentifier(name))
+        return TagKey.of(RegistryKeys.ITEM, id(name))
     }
 }

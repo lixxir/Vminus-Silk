@@ -6,6 +6,6 @@ import net.lixir.vminus.item.VminusItems
 
 object VminusTinting {
     fun initialize() {
-        VminusClient.CLIENT_REGISTRY.tintItems(TintTypes.FOLIAGE, VminusItems.TEST)
+        VminusClient.REGISTRY.tintItems(TintTypes.FOLIAGE, VminusItems.TEST)
     }
 }

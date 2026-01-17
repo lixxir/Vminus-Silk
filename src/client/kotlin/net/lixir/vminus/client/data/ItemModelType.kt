@@ -1,25 +1,24 @@
 package net.lixir.vminus.client.data
 
 import net.lixir.vminus.client.datagen.provider.VModelProvider
-import net.lixir.vminus.client.definition.datagen.ItemDataGenDefinitionEntry
 import net.minecraft.data.client.ItemModelGenerator
 import net.minecraft.item.Item
-import net.lixir.vminus.client.definition.datagen.ItemDataGenDefinition
+import net.lixir.vminus.client.definition.datagen.ItemDatagenDefinition
 
 /**
  * Represents a type of item model definition.
  *
- * Implementations (usually enums) define how models are generated from a [ItemDataGenDefinition]
+ * Implementations (usually enums) define how models are generated from a [ItemDatagenDefinition]
  * in a subclass of [VModelProvider] during data generation.
  *
  * @see [ItemModelTypes]
- * @see [ItemDataGenDefinition]
+ * @see [ItemDatagenDefinition]
  * @see [VModelProvider]
  */
-interface ItemModelType : ModelType<Item, VModelProvider, ItemModelGenerator, ItemDataGenDefinitionEntry> {
+interface ItemModelType : ModelType<Item, VModelProvider, ItemModelGenerator, ItemDatagenDefinition> {
     override val isEmpty: Boolean
-        get() = this.asString() == ItemModelTypes.NONE.asString() || isUnset
+        get() = this.identifier == ItemModelTypes.NONE.id || isUnset
 
     override val isUnset: Boolean
-        get() = this.asString() == ItemModelTypes.UNSET.asString()
+        get() = this.identifier == ItemModelTypes.UNSET.id
 }

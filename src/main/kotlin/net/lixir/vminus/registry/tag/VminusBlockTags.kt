@@ -1,6 +1,6 @@
 package net.lixir.vminus.registry.tag
 
-import net.lixir.vminus.Vminus.Companion.vminusIdentifier
+import net.lixir.vminus.Vminus.Companion.id
 import net.minecraft.block.Block
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
@@ -44,6 +44,6 @@ object VminusBlockTags {
     val VALID_SPAWN: TagKey<Block> = of("valid_spawn")
 
     private fun of(name: String): TagKey<Block> {
-        return TagKey.of(RegistryKeys.BLOCK, vminusIdentifier(name))
+        return TagKey.of(RegistryKeys.BLOCK, id(name))
     }
 }

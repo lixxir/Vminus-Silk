@@ -1,8 +1,7 @@
 package net.lixir.vminus.client.datagen.block;
 
 import lombok.Getter;
-import net.lixir.vminus.client.definition.datagen.BlockDataGenDefinitionEntry;
-import net.lixir.vminus.client.definition.datagen.BlockDataGenDefinition;
+import net.lixir.vminus.client.definition.datagen.BlockDatagenDefinition;
 import net.lixir.vminus.registry.VRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowerbedBlock;
@@ -46,11 +45,11 @@ public abstract class VBlockLootTableGenerator extends BlockLootTableGenerator {
         for (Block block : blocks) {
             if (block.getLootTableKey().equals(LootTables.EMPTY))
                 continue;
-            BlockDataGenDefinition blockDefinition = BlockDataGenDefinition.Companion.of(block);
+            BlockDatagenDefinition blockDefinition = BlockDatagenDefinition.Companion.of(block);
             BlockLootTableType tableType = blockDefinition.getLootTableType();
             if (tableType.isEmpty())
                 continue;
-            tableType.apply(BlockDataGenDefinitionEntry.Companion.of(block), this);
+           // tableType.apply(BlockDataGenDefinitionEntry.Companion.of(block), this);
         }
     }
 

@@ -1,8 +1,9 @@
 package net.lixir.vminus.client.datagen.block;
 
 
-import net.lixir.vminus.client.definition.datagen.BlockDataGenDefinitionEntry;
-import net.lixir.vminus.client.definition.datagen.BlockDataGenDefinition;
+import net.lixir.vminus.client.definition.datagen.BlockDatagenDefinition;
+import net.minecraft.block.Block;
+import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.function.BiConsumer;
 
@@ -12,12 +13,12 @@ import java.util.function.BiConsumer;
  * Implementations (usually enums like {@link BlockLootTableTypes})
  * determine how loot is generated for a block during data generation.
  * Each type wraps a {@link BiConsumer} that applies loot rules for a block
- * and its {@link BlockDataGenDefinition}.
+ * and its {@link BlockDatagenDefinition}.
  */
 public interface BlockLootTableType {
-    void apply(BlockDataGenDefinitionEntry blockDatagenDefinitionEntry, VBlockLootTableGenerator generator);
+    void apply(Block block, BlockDatagenDefinition definition, VBlockLootTableGenerator generator);
 
-    BiConsumer<BlockDataGenDefinitionEntry, VBlockLootTableGenerator> getConsumer();
+    TriConsumer<Block, BlockDatagenDefinition, VBlockLootTableGenerator> getConsumer();
 
     String getName();
 

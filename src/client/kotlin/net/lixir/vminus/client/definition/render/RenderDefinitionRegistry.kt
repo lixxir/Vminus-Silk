@@ -2,32 +2,27 @@ package net.lixir.vminus.client.definition.render
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
-import net.lixir.vminus.Vminus
-import net.lixir.vminus.client.definition.AbstractDefinitionRegistry
-import net.lixir.vminus.client.definition.BlockApplicableDefinitionRegistry
-import net.lixir.vminus.client.definition.render.BlockRenderDefinition.Companion.ofDefault
+import net.lixir.vminus.client.definition.registry.DefinitionRegistry
+import net.lixir.vminus.client.definition.registry.DefinitionRegistryWithBlocks
+
 import net.lixir.vminus.registry.VRegistry
 import net.minecraft.block.Block
 import java.util.concurrent.ConcurrentHashMap
 
 open class RenderDefinitionRegistry (
-    modId: String,
-    definitionGroupProvider: RenderDefinitionGroupProvider
+    modId: String
 ) :
-    AbstractDefinitionRegistry<RenderDefinitionGroupProvider>(modId, definitionGroupProvider),
-    BlockApplicableDefinitionRegistry<BlockRenderDefinition> {
+    DefinitionRegistry<RenderDefinitionProvider<*>>(modId),
+    DefinitionRegistryWithBlocks<BlockRenderDefinition> {
 
     override val blockDefinitions: Object2ObjectMap<Block, BlockRenderDefinition> = Object2ObjectOpenHashMap()
 
     init {
-        val registry = VRegistry.fromId(modId)
-        for (block in registry.blocks) define(block, ofDefault())
-
         REGISTRIES[modId] = this
     }
 
-    override fun getBlockDefinition(block: Block): BlockRenderDefinition
-            = blockDefinitions.getOrDefault(block, BlockRenderDefinition.of())
+    override fun getBlockDefinition(block: Block): BlockRenderDefinition =
+        blockDefinitions.getOrDefault(block, BlockRenderDefinition())
 
     final override fun define(block: Block, definition: BlockRenderDefinition) {
         blockDefinitions[block] = definition.setDefault(block)
@@ -37,5 +32,9 @@ open class RenderDefinitionRegistry (
         private val REGISTRIES = ConcurrentHashMap<String, RenderDefinitionRegistry>()
 
         fun fromId(id: String): RenderDefinitionRegistry? = REGISTRIES[id]
+    }
+
+    override fun generateDefinitions(vRegistry: VRegistry) {
+        for (block in vRegistry.blocks) define(block, BlockRenderDefinition.ofInheritable())
     }
 }

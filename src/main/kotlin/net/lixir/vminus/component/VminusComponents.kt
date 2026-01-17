@@ -1,6 +1,6 @@
 package net.lixir.vminus.component
 
-import net.lixir.vminus.Vminus.Companion.vminusIdentifier
+import net.lixir.vminus.Vminus.Companion.id
 import net.minecraft.entity.player.PlayerEntity
 import org.ladysnake.cca.api.v3.component.ComponentKey
 import org.ladysnake.cca.api.v3.component.ComponentRegistryV3
@@ -16,7 +16,7 @@ class VminusComponents : EntityComponentInitializer {
 
     companion object {
         val CAPE: ComponentKey<CapeComponent> = ComponentRegistryV3.INSTANCE.getOrCreate(
-            vminusIdentifier("cape"),
+            id("cape"),
             CapeComponent::class.java
         )
     }

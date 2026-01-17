@@ -3,6 +3,7 @@ package net.lixir.vminus.mixin.block;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.lixir.vminus.duck.VisionDuck;
 import net.lixir.vminus.duck.block.VminusBlockDuck;
+import net.lixir.vminus.util.Identifiable;
 import net.lixir.vminus.vision.Vision;
 import net.lixir.vminus.vision.property.BlockVisionProperties;
 import net.lixir.vminus.vision.property.VisionPropertyRegistry;
@@ -12,6 +13,7 @@ import net.lixir.vminus.item.ItemReplacement;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,7 +24,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Block.class)
-public class BlockMixin implements VisionDuck, VminusBlockDuck {
+public class BlockMixin implements Identifiable, VisionDuck, VminusBlockDuck {
     @Unique
     private final Block vminus$self = (Block) (Object) this;
 
@@ -75,5 +77,11 @@ public class BlockMixin implements VisionDuck, VminusBlockDuck {
     @Override
     public @NotNull VisionType<?> vminus$getVisionType() {
         return VisionTypes.INSTANCE.getBLOCK();
+    }
+
+    @Unique
+    @Override
+    public Identifier getIdentifier() {
+        return Registries.BLOCK.getId(vminus$self);
     }
 }

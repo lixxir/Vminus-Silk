@@ -19,23 +19,24 @@ import org.jetbrains.annotations.Nullable;
  * </ul>
  */
 
-public final class LangKey {
+public final class Translation {
     private final @NotNull String key;
-    private LangKey(@NotNull String key) {
+    private Translation(@NotNull String key) {
         this.key = key;
-    }    public static final @NotNull LangKey UNSET = LangKey.of("unset");
+    }
+    public static final @NotNull Translation UNSET = Translation.of("unset");
 
     /**
-     * Creates a new {@link LangKey} from a string.
+     * Creates a new {@link Translation} from a string.
      * <p>
      * If the string is blank, the unset key is returned.
      *
      * @param key the raw key string
-     * @return a new {@link LangKey} instance
+     * @return a new {@link Translation} instance
      */
-    public static @NotNull LangKey of(@NotNull String key) {
-        return key.isBlank() ? UNSET : new LangKey(key);
-    }    public static final @NotNull LangKey NONE = LangKey.of("none");
+    public static @NotNull Translation of(@NotNull String key) {
+        return key.isBlank() ? UNSET : new Translation(key);
+    }    public static final @NotNull Translation NONE = Translation.of("none");
 
     /**
      * Checks if this key is default.
@@ -68,7 +69,7 @@ public final class LangKey {
     public boolean equals(@Nullable Object obj) {
         if (this == obj)
             return true;
-        if (!(obj instanceof LangKey other))
+        if (!(obj instanceof Translation other))
             return false;
         return key.equals(other.key);
     }

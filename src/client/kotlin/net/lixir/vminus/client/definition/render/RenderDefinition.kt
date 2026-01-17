@@ -2,16 +2,14 @@ package net.lixir.vminus.client.definition.render
 
 import net.lixir.vminus.client.definition.DefinitionCategory
 import net.lixir.vminus.client.definition.DefinitionCategories
-import net.lixir.vminus.client.definition.AbstractDefinition
+import net.lixir.vminus.client.definition.Definition
 
-abstract class RenderDefinition<D : RenderDefinition<D, T>, T> protected constructor() : AbstractDefinition<D, T>() {
-    override val type: DefinitionCategory
+abstract class RenderDefinition<T> : Definition<T>() {
+    override val category
         get() = DefinitionCategories.RENDER
 
-    @Suppress("UNCHECKED_CAST")
-    override fun merge(other: D?): D {
-        if (other == null) return this as D
-
+    override fun merge(other: Definition<T>?): Definition<T> {
+        if (other == null || other !is RenderDefinition<T>) return this
         return super.merge(other)
     }
 }

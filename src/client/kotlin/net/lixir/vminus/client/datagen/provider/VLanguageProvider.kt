@@ -22,7 +22,7 @@ abstract class VLanguageProvider protected constructor(
     protected val modId: String = dataOutput.modId
 
     override fun generateTranslations(wrapperLookup: WrapperLookup, translationBuilder: TranslationBuilder) {
-        val registry = DataGenDefinitionRegistry.fromId(modId) ?: return
+        val registry = DatagenDefinitionRegistry.fromId(modId) ?: return
 
         for ((item, definition) in registry.itemDefinitions.entries) {
             autoGenerate(
@@ -51,13 +51,13 @@ abstract class VLanguageProvider protected constructor(
         }
     }
 
-    protected fun <E : DataGenDefinition<E, T>, T> autoGenerate(
+    private fun <E : DatagenDefinition<T>, T> autoGenerate(
         any: Any?,
         idPath: String,
-        definition: DataGenDefinition<E, T>,
+        definition: DatagenDefinition<T>,
         translationBuilder: TranslationBuilder
     ) {
-        val langKey = definition.langKey
+        val langKey = definition.translation
         if (langKey.isEmpty) return
         if (langKey.isUnset) {
             val name = toTitleCase(idPath.replace('_', ' '))

@@ -38,6 +38,10 @@ abstract class SoundDefinitionProvider(protected val output: FabricDataOutput) :
                     }
                 }
 
+                is Identifier -> {
+                    entry.sounds.add(SoundVariant(loc))
+                }
+
                 is SoundVariant -> entry.sounds.add(loc)
                 else -> throw IllegalArgumentException("Unsupported sound variant type: $loc")
             }

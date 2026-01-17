@@ -39,6 +39,6 @@ class Vminus : ModInitializer {
             LOGGER.info("DEV - [ $loggerInput ]")
         }
 
-        fun vminusIdentifier(path: String): Identifier = Identifier.of(ID, path)
+        fun id(path: String): Identifier = Identifier.of(ID, path)
     }
 }
